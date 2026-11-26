@@ -1,0 +1,65 @@
+# Capability events: discrete evidence the benchmark series don't capture well.
+#
+# Each event enters the model as likelihood ratios over the three growth regimes of the frontier
+# time horizon (super = doubling time shrinking, exp = constant, sub = growing):
+#   LR_regime = P(seeing this event by its date | regime) / P(... | exp)
+# The log LR is multiplied by `confidence` (how sure we are the event is real and as described)
+# and each regime's log LR is capped at |ln 3| per event, so no single headline can dominate.
+# Events also partly overlap with benchmark data (the same models score on FrontierMath etc.),
+# which is why the ratios are kept modest.
+#
+# status: proposed (added by the update agent, not used) -> accepted (used) / rejected.
+# Only a human changes status to accepted.
+
+events:
+  - id: rh-lean-2026-11
+    date: 2026-11-20
+    title: Lean-verified proof of the Riemann hypothesis (and GRH for Dirichlet L-functions), written with an unreleased Claude model
+    summary: >
+      Levent Alpöge (Anthropic) released a ~17M-line Lean proof, produced with an unreleased Claude
+      model under his guidance. The Lean FRO and Mathlib Initiative report "full confidence" that it
+      checks against Mathlib's RiemannHypothesis statement, with independent kernel re-checks
+      (Sutherland, Rubinstein). No human-readable proof and no peer review yet; human-guided, not autonomous.
+    sources:
+      - https://leanprover-community.github.io/blog/posts/riemann-hypothesis/
+      - https://math.mit.edu/~drew/grh/
+      - https://terrytao.wordpress.com/2026/11/20/unforced-euler-singularity-unforced-navier-stokes-singularity-and-the-generalized-riemann-hypothesis/
+      - https://phys.org/news/2026-11-sacred-mathematics-riemann-hypothesis-ai.html
+    likelihood_ratio: {super: 2.0, exp: 1.0, sub: 0.5}
+    confidence: 0.7
+    reasoning: >
+      A formally checked proof of a famous open problem in late 2026 is much more likely if AI
+      research capability is compounding faster than a constant doubling time implies. Discounted
+      because a human guided the work and the proof is not yet understood or reviewed.
+    status: accepted
+    added_by: initial build (2026-11-25)
+
+  - id: quasi-rh-2026-10
+    date: 2026-10-06
+    title: OpenAI announces an AI-produced "quasi-Riemann hypothesis" (zeros in 1/12 < Re s < 11/12)
+    summary: >
+      A 49-page result, largely accepted by experts but without independent write-ups; an earlier
+      1/8-7/8 version was checked in Lean.
+    sources:
+      - https://www.quantamagazine.org/ai-proved-the-quasi-riemann-hypothesis-what-happens-now-20261019/
+    likelihood_ratio: {super: 1.3, exp: 1.0, sub: 0.8}
+    confidence: 0.6
+    reasoning: Strong research-level math from AI ahead of most expectations; partially overlaps with the RH event.
+    status: accepted
+    added_by: initial build (2026-11-25)
+
+  - id: erdos-2026
+    date: 2026-10-31
+    title: AI contributions to Erdős problems (autonomous solutions, 700+ released proofs)
+    summary: >
+      DeepMind's Aletheia solved two Erdős problems on its own; OpenAI released 700+ proofs in October 2026.
+      Experts count only a handful as significant, and much of the earlier progress was literature search.
+    sources:
+      - https://www.quantamagazine.org/how-ai-tore-through-a-mathematical-community-20260803/
+      - https://epoch.ai/benchmarks/frontiermath-erdos
+      - https://github.com/teorth/erdosproblems
+    likelihood_ratio: {super: 1.2, exp: 1.0, sub: 0.9}
+    confidence: 0.6
+    reasoning: Steady accumulation of research-level results; weak evidence on its own.
+    status: accepted
+    added_by: initial build (2026-11-25)

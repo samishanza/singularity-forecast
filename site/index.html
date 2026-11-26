@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Singularity Forecast</title>
+<meta name="description" content="A continuously updated, data-driven probability distribution for when AI recursive self-improvement reaches artificial superintelligence.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="viz-root">
+<header class="top">
+  <div class="wrap">
+    <p class="eyebrow">Singularity Forecast</p>
+    <h1>When does recursive self-improvement reach superintelligence?</h1>
+    <p class="lede">A probabilistic model fitted to AI benchmark data and updated automatically as new models, measurements and capability breakthroughs arrive. Every number below is a probability, not a prediction of a single date.</p>
+    <p class="meta" id="meta">Loading…</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero card" aria-labelledby="hero-label">
+    <div class="hero-main">
+      <p class="label" id="hero-label">50% chance of artificial superintelligence by</p>
+      <p class="hero-figure" id="hero-asi">—</p>
+      <p class="sub" id="hero-range"></p>
+    </div>
+    <div class="tiles" id="tiles"></div>
+  </section>
+
+  <section class="card">
+    <h2>When each milestone arrives</h2>
+    <p class="sub">Probability that each milestone has happened by a given date. Milestones follow AI-2027: an automated coder, then a superhuman AI researcher, a superintelligent AI researcher, and finally ASI.</p>
+    <div class="legend" id="cdf-legend"></div>
+    <div class="chart" id="cdf"></div>
+    <details><summary>Table view</summary><div id="cdf-table"></div></details>
+  </section>
+
+  <section class="card">
+    <h2>Probability distribution for ASI</h2>
+    <p class="sub">Probability that ASI arrives in each quarter. The long right tail is the chance that the last step, from superintelligent researcher to superintelligence, is far harder than expected.</p>
+    <div class="chart" id="density"></div>
+    <p class="note" id="density-note"></p>
+  </section>
+
+  <section class="card">
+    <h2>How the forecast has moved</h2>
+    <p class="sub">The median ASI date (line) and its middle 50% range (band), as this model would have estimated it each month using only the data available at the time. Points after today's first live run are real daily updates.</p>
+    <div class="chart" id="history"></div>
+    <details><summary>Table view</summary><div id="history-table"></div></details>
+  </section>
+
+  <section class="card">
+    <h2>The trend that drives it: how long a task AI can do</h2>
+    <p class="sub">METR's 50% time horizon: the length of task (measured by how long it takes a human expert) that the best AI agent completes half the time. Filled dots are METR measurements; hollow dots are estimates for newer models from Epoch's Capabilities Index. The band is the model's 80% range, the darker band its 50% range.</p>
+    <div class="chart" id="horizon"></div>
+    <details><summary>Table view</summary><div id="horizon-table"></div></details>
+  </section>
+
+  <section class="card two-col">
+    <div>
+      <h2>What would change the answer</h2>
+      <p class="sub">The ASI median and 80% range when one assumption changes.</p>
+      <div id="sensitivity"></div>
+    </div>
+    <div>
+      <h2>Does the trend model predict well?</h2>
+      <p class="sub">Refit on data up to each past date, then scored on every later METR frontier measurement.</p>
+      <div id="backtest"></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Capability events used</h2>
+    <p class="sub">Breakthroughs the benchmarks don't capture enter as modest likelihood ratios over the growth regimes. An agent proposes new ones each week; a human accepts them.</p>
+    <div id="events"></div>
+  </section>
+
+  <section class="card method">
+    <h2>Method</h2>
+    <h3>1. The time-horizon trend</h3>
+    <p>Let <i>h</i>(<i>t</i>) be the frontier 50% time horizon. Its doubling time at 1 January 2026 is <i>D</i>, and each further doubling takes <i>g</i> times as long as the one before (<i>g</i> &lt; 1: superexponential; <i>g</i> = 1: exponential; <i>g</i> &gt; 1: subexponential). Gaining <i>n</i> doublings then takes <code>τ(n) = D(1 − gⁿ)/(1 − g)</code>, so</p>
+    <p class="eq"><code>log₂ h(t) = y₀ + ln(1 − (1 − g)(t − 2026)/D) / ln g</code></p>
+    <p>For <i>g</i> &lt; 1 the horizon diverges in finite time. The prior on <i>g</i> mixes the three regimes (40% / 45% / 15%). Observations get a Student-t likelihood (5 degrees of freedom) whose scale combines each measurement's own error with extra frontier scatter. The posterior is computed by importance sampling refined with population Monte Carlo, and reports its effective sample size.</p>
+    <h3>2. Fresher data than METR</h3>
+    <p>METR's public measurements lag by months. For models with both a METR horizon and an Epoch Capabilities Index score, we fit <code>log₂ h = a + b·ECI</code> by weighted least squares, then translate newer frontier ECI scores into horizon estimates that carry the map's full predictive uncertainty.</p>
+    <h3>3. From horizon to automated coder</h3>
+    <p>The automated coder (AI-2027's “superhuman coder”) arrives when the horizon crosses an uncertain threshold: lognormal, median 2 work-years, 80% range 1 work-month to 40 work-years. A deployment and cost gap follows (median 4 months). Because no lab has automated its coding yet, the threshold is conditioned to lie above today's horizon.</p>
+    <h3>4. Takeoff</h3>
+    <p>Each later gap is an amount of human-only research time <i>W</i>, crossed while the AI R&amp;D progress multiplier rises from <i>m</i><sub>A</sub> to <i>m</i><sub>B</sub>. With <code>m(f) = 1 + (m<sub>A</sub> − 1)·r<sup>f</sup></code> and <code>r = (m<sub>B</sub> − 1)/(m<sub>A</sub> − 1)</code> over the fraction <i>f</i> of the gap crossed, the calendar time is exactly <code>T = W·(1 − ln(m<sub>B</sub>/m<sub>A</sub>)/ln r)</code>. Gap sizes follow AI-2027's takeoff forecast. Unlike AI-2027, the multipliers themselves are uncertain (lognormal around their 5×, 25×, 250× and 2,000× point values). The far tail of the last gap is narrowed, because the authors call their own upper bound too high.</p>
+    <h3>5. Updating</h3>
+    <p>A nightly job downloads the data and refits everything. A weekly agent scans lab announcements, arXiv and math databases for capability events and proposes them, with sources, as likelihood ratios. Each event's log ratio is scaled by a confidence level and capped at ln 3 per regime. A human accepts or rejects each one.</p>
+    <h3>Limitations</h3>
+    <ul>
+      <li>Time horizons measure software tasks. Whether they keep tracking general research ability is an assumption.</li>
+      <li>Training compute keeps growing during takeoff in reality, but this model, like AI-2027's takeoff, leaves that out, which makes takeoff slower than it might be.</li>
+      <li>Backtests show past versions of this kind of model consistently underpredicted progress. The priors were widened in response, but the bias could persist.</li>
+      <li>The takeoff parameters are expert judgment from a small number of forecasters, not data.</li>
+    </ul>
+    <p class="sources">Built on: <a href="https://ai-2027.com/research/takeoff-forecast">AI-2027 takeoff forecast</a>, <a href="https://ai-2027.com/research/timelines-forecast">AI-2027 timelines forecast</a>, <a href="https://ai-2040.com/">AI 2040</a>, <a href="https://www.alignmentforum.org/posts/uy6B5rEPvcwi55cBK/research-note-a-simpler-ai-timelines-model-predicts-99-ai-r">Kwa's simpler timelines model</a>. Data: <a href="https://metr.org/">METR</a> (time horizons), <a href="https://epoch.ai/data">Epoch AI</a> (CC-BY-4.0), <a href="https://arcprize.org/">ARC Prize</a>, <a href="https://github.com/teorth/erdosproblems">Erdős problems database</a>.</p>
+  </section>
+
+  <section class="card">
+    <h2>Data freshness</h2>
+    <div id="sources"></div>
+  </section>
+</main>
+<footer class="wrap foot"><p>Not investment, policy or life advice. Forecasts of unprecedented events are deeply uncertain; read the ranges, not the medians.</p></footer>
+</div>
+<div class="tooltip" id="tip" role="status" aria-live="polite" hidden></div>
+<script src="app.js" type="module"></script>
+</body>
+</html>
