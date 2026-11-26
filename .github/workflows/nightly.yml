@@ -24,8 +24,8 @@ jobs:
       VERCEL_ORG_ID: team_IWfFk9n5Yt25b35hZSgoMPH6
       VERCEL_PROJECT_ID: prj_sDntX4Z1DPguBoFfoRO26das34UZ
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
           python-version: "3.11"
           cache: pip
@@ -55,4 +55,4 @@ jobs:
         run: |
           D="$RUNNER_TEMP/site-deploy"
           mkdir -p "$D" && cp -r site vercel.json "$D"/
-          cd "$D" && npx --yes vercel@latest deploy --prod --yes --token "$VERCEL_TOKEN"
+          cd "$D" && npx --yes vercel@67.0.0 deploy --prod --yes --token "$VERCEL_TOKEN"
