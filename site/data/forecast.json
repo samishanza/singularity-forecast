@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-26T02:22:27+00:00",
+ "generated_at": "2026-11-26T02:24:11+00:00",
  "as_of": "2026-11-26",
  "now": 2026.9013698630138,
  "milestones": {
@@ -1689,56 +1689,56 @@
    "metr_horizons.yaml": {
     "url": "https://metr.org/assets/benchmark_results_1_1.yaml",
     "bytes": 16255,
-    "fetched": "2026-11-26T02:22:16.698611+00:00",
+    "fetched": "2026-11-26T02:24:00.096392+00:00",
     "ETag": "\"efa2e1cd25bf7c201c0e68b93f9a3b30-ssl\"",
     "Last-Modified": null
    },
    "eci_scores.csv": {
     "url": "https://epoch.ai/data/eci_scores.csv",
     "bytes": 31805,
-    "fetched": "2026-11-26T02:22:17.783849+00:00",
+    "fetched": "2026-11-26T02:24:01.307828+00:00",
     "ETag": "\"60ecd20ac021661b959cea7d15c1c056\"",
     "Last-Modified": null
    },
    "benchmark_data.zip": {
     "url": "https://epoch.ai/data/benchmark_data.zip",
-    "bytes": 2329652,
-    "fetched": "2026-11-26T02:22:18.888957+00:00",
-    "ETag": "\"54920b19dac30ff4f3c02f4f0388f71f\"",
+    "bytes": 2329643,
+    "fetched": "2026-11-26T02:24:02.542771+00:00",
+    "ETag": "\"973572d42aca45c3048b6fe34066363c\"",
     "Last-Modified": null
    },
    "notable_ai_models.csv": {
     "url": "https://epoch.ai/data/notable_ai_models.csv",
     "bytes": 2298776,
-    "fetched": "2026-11-26T02:22:19.994487+00:00",
+    "fetched": "2026-11-26T02:24:03.671680+00:00",
     "ETag": "\"f3dc0764318d4f5d8596f4bf8a46fa25\"",
     "Last-Modified": null
    },
    "ai_supercomputers.csv": {
     "url": "https://epoch.ai/data/ai_supercomputers.csv",
     "bytes": 304311,
-    "fetched": "2026-11-26T02:22:21.131623+00:00",
+    "fetched": "2026-11-26T02:24:04.862850+00:00",
     "ETag": "\"20be06bce4191da15e3d012780325922\"",
     "Last-Modified": null
    },
    "arc_evaluations.json": {
     "url": "https://arcprize.org/media/data/evaluations.json",
     "bytes": 298625,
-    "fetched": "2026-11-26T02:22:22.417483+00:00",
+    "fetched": "2026-11-26T02:24:05.980160+00:00",
     "ETag": "\"7d6fd8da67d75fe2683ebcd5ce5a7415\"",
     "Last-Modified": "Tue, 24 Nov 2026 15:59:54 GMT"
    },
    "arc_models.json": {
     "url": "https://arcprize.org/media/data/models.json",
     "bytes": 205341,
-    "fetched": "2026-11-26T02:22:23.518419+00:00",
+    "fetched": "2026-11-26T02:24:07.257277+00:00",
     "ETag": "\"1afd76034911fbbcff94818343693e96\"",
     "Last-Modified": "Tue, 24 Nov 2026 15:59:54 GMT"
    },
    "erdos_stats_history.csv": {
     "url": "https://raw.githubusercontent.com/teorth/erdosproblems/main/data/statistics_history.csv",
     "bytes": 217045,
-    "fetched": "2026-11-26T02:22:24.600026+00:00",
+    "fetched": "2026-11-26T02:24:08.325169+00:00",
     "ETag": "\"587e67d66706066c0460efa6dd4c3ae24b66add6662ee288e333f0b4d5954e02\"",
     "Last-Modified": null
    }
