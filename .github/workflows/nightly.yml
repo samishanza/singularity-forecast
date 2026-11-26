@@ -50,4 +50,9 @@ jobs:
       # Vercel won't build commits by authors outside the account, so the job deploys itself.
       - name: Deploy to Vercel
         if: steps.commit.outputs.changed == 'true' && env.VERCEL_TOKEN != ''
-        run: npx --yes vercel@latest deploy --prod --yes --token "$VERCEL_TOKEN"
+        # Deploy from a copy outside the git checkout: from inside it the CLI attaches the bot as the
+        # commit author, and Vercel blocks authors who aren't on the account.
+        run: |
+          D="$RUNNER_TEMP/site-deploy"
+          mkdir -p "$D" && cp -r site vercel.json "$D"/
+          cd "$D" && npx --yes vercel@latest deploy --prod --yes --token "$VERCEL_TOKEN"
