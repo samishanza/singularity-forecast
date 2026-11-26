@@ -19,6 +19,10 @@ jobs:
   refit:
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    env:
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_ORG_ID: team_IWfFk9n5Yt25b35hZSgoMPH6
+      VERCEL_PROJECT_ID: prj_sDntX4Z1DPguBoFfoRO26das34UZ
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -34,10 +38,16 @@ jobs:
         # sensitivity and backtest are cheap enough to refresh every night
         run: python -m forecast.build --sensitivity --backtest
       - name: Commit updated forecast
+        id: commit
         run: |
           git config user.name "singularity-forecast-bot"
           git config user.email "actions@users.noreply.github.com"
           git add site/data
-          if git diff --cached --quiet; then echo "no changes"; exit 0; fi
+          if git diff --cached --quiet; then echo "no changes"; echo "changed=false" >> "$GITHUB_OUTPUT"; exit 0; fi
           git commit -m "Nightly refit $(date -u +%Y-%m-%d)"
           git push
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+      # Vercel won't build commits by authors outside the account, so the job deploys itself.
+      - name: Deploy to Vercel
+        if: steps.commit.outputs.changed == 'true' && env.VERCEL_TOKEN != ''
+        run: npx --yes vercel@latest deploy --prod --yes --token "$VERCEL_TOKEN"
